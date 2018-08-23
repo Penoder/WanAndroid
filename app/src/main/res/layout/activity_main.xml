@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable name="viewModel" type="com.penoder.wanandroid.ui.viewModel.MainViewModel"/>
+    </data>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@color/backgroundColor"
+            android:layout_height="match_parent">
+
+        <com.penoder.mylibrary.view.NoScrollViewPager
+                android:id="@+id/viewPager_main"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+        <View style="@style/HorizontalLine"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_height="48dp">
+
+            <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:onClick="@{viewModel.onHomeClick}"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_height="match_parent">
+
+                <ImageView
+                        android:id="@+id/imgView_tabHome"
+                        android:background="@drawable/selector_tab_home"
+                        android:layout_width="24dp"
+                        android:contentDescription="@string/app_name"
+                        android:layout_height="24dp"/>
+
+                <TextView
+                        android:id="@+id/txtView_tabHome"
+                        android:textSize="@dimen/txtSize_14"
+                        android:textColor="@color/selector_second_txt_and_main"
+                        android:text="@string/label_home"
+                        android:gravity="center"
+                        android:layout_marginTop="2dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:onClick="@{viewModel.onTodoClick}"
+                    android:layout_height="match_parent">
+
+                <ImageView
+                        android:id="@+id/imgView_tabTodo"
+                        android:background="@drawable/selector_tab_todo"
+                        android:layout_width="24dp"
+                        android:contentDescription="@string/app_name"
+                        android:layout_height="24dp"/>
+
+                <TextView
+                        android:id="@+id/txtView_tabTodo"
+                        android:textSize="@dimen/txtSize_14"
+                        android:textColor="@color/selector_second_txt_and_main"
+                        android:text="@string/label_todo"
+                        android:textStyle="italic"
+                        android:gravity="center"
+                        android:layout_marginTop="2dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:onClick="@{viewModel.onSystemClick}"
+                    android:gravity="center"
+                    android:layout_height="match_parent">
+
+                <ImageView
+                        android:id="@+id/imgView_tabSystem"
+                        android:background="@drawable/selector_tab_system"
+                        android:layout_width="24dp"
+                        android:contentDescription="@string/app_name"
+                        android:layout_height="24dp"/>
+
+                <TextView
+                        android:id="@+id/txtView_tabSystem"
+                        android:textSize="@dimen/txtSize_14"
+                        android:textColor="@color/selector_second_txt_and_main"
+                        android:text="@string/label_system"
+                        android:gravity="center"
+                        android:layout_marginTop="2dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:onClick="@{viewModel.onSettingClick}"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_height="match_parent">
+
+                <ImageView
+                        android:id="@+id/imgView_tabSetting"
+                        android:background="@drawable/selector_tab_setting"
+                        android:layout_width="24dp"
+                        android:contentDescription="@string/app_name"
+                        android:layout_height="24dp"/>
+
+                <TextView
+                        android:id="@+id/txtView_tabSetting"
+                        android:textSize="@dimen/txtSize_14"
+                        android:textColor="@color/selector_second_txt_and_main"
+                        android:text="@string/label_setting"
+                        android:gravity="center"
+                        android:layout_marginTop="2dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

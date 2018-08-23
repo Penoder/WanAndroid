@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent" xmlns:tools="http://schemas.android.com/tools"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/normal_margin_size"
+            android:layout_marginStart="@dimen/normal_margin_size"
+            android:layout_marginEnd="@dimen/normal_margin_size"
+            android:layout_height="wrap_content">
+
+        <TextView
+                android:id="@+id/txtView_chapterAuthor"
+                android:layout_width="0dip"
+                android:textSize="@dimen/txtSize_14"
+                android:textColor="@color/secondTextBlack"
+                tools:text="文章作者名"
+                android:maxLines="1"
+                android:layout_marginEnd="@dimen/normal_margin_size"
+                android:ellipsize="end"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"/>
+
+        <TextView
+                android:id="@+id/txtView_chapterTime"
+                android:layout_width="wrap_content"
+                android:textSize="@dimen/txtSize_14"
+                android:textColor="@color/secondTextBlack"
+                tools:text="文章更新时间"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="@dimen/normal_margin_size"
+            android:layout_width="match_parent"
+            android:layout_marginStart="@dimen/normal_margin_size"
+            android:layout_marginEnd="@dimen/normal_margin_size"
+            android:layout_height="90dp">
+
+        <ImageView
+                android:id="@+id/imgView_chapterPic"
+                android:contentDescription="@string/app_name"
+                tools:background="@color/hintTextBlack"
+                android:layout_width="90dp"
+                android:scaleType="centerCrop"
+                android:layout_marginEnd="12dp"
+                android:layout_height="90dp"/>
+
+        <TextView
+                android:id="@+id/txtView_chapterTitle"
+                android:layout_width="match_parent"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_toEndOf="@+id/imgView_chapterPic"
+                android:textSize="@dimen/txtSize_14"
+                android:textColor="@color/commonTextBlack"
+                tools:text="kotlin 开发一款 豆瓣 App"
+                android:layout_height="wrap_content"/>
+
+        <TextView
+                android:id="@+id/txtView_chapterDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:minLines="2"
+                android:textSize="@dimen/txtSize_14"
+                android:textColor="@color/secondTextBlack"
+                android:ellipsize="end"
+                tools:text="初学kotlin，所以做这个 豆瓣 app 来练练手，感受了 kotlin 的魅力~ App 数据采用 豆瓣 api  （如果不小心侵权了,sorry,联系我,我把它删除了,谢谢.）"
+                android:layout_toEndOf="@+id/imgView_chapterPic"
+                android:layout_centerInParent="true"/>
+
+        <TextView
+                android:id="@+id/txtView_chapterTag"
+                android:maxLines="1"
+                android:textColor="@color/dodgerblue"
+                android:textSize="@dimen/txtSize_14"
+                tools:text="Kotlin"
+                android:textStyle="italic"
+                android:layout_toEndOf="@+id/imgView_chapterPic"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+    <View
+            android:layout_width="match_parent"
+            android:background="@color/dividerBlack"
+            android:layout_height="10dp"/>
+
+</LinearLayout>

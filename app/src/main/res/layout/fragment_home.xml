@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="viewModel" type="com.penoder.wanandroid.ui.viewModel.HomeViewModel"/>
+    </data>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+                android:background="@color/mainColor"
+                android:gravity="center"
+                android:textColor="@color/commonTextWhite"
+                android:textSize="@dimen/txtSize_16"
+                android:text="@string/label_home"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"/>
+
+        <com.penoder.mylibrary.refresh.PenoderRefreshLayout
+                android:id="@+id/refresh_home"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <android.support.v4.widget.NestedScrollView
+                    android:scrollbars="none"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_height="match_parent">
+
+                    <com.penoder.mylibrary.banner.BGABanner
+                            android:id="@+id/banner_home"
+                            android:focusable="false"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"/>
+
+                    <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycler_home"
+                            android:focusable="false"
+                            tools:listitem="@layout/item_home_recycler"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+
+                </LinearLayout>
+
+            </android.support.v4.widget.NestedScrollView>
+
+        </com.penoder.mylibrary.refresh.PenoderRefreshLayout>
+
+    </LinearLayout>
+
+</layout>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="txtSize_10">10sp</dimen>
+    <dimen name="txtSize_12">12sp</dimen>
+    <dimen name="txtSize_14">14sp</dimen>
+    <dimen name="txtSize_16">16sp</dimen>
+    <dimen name="txtSize_18">18sp</dimen>
+    <dimen name="txtSize_20">20sp</dimen>
+    <dimen name="txtSize_22">22sp</dimen>
+    <dimen name="txtSize_24">24sp</dimen>
+
+    <dimen name="normal_margin_size">12dp</dimen>
+    <dimen name="large_margin_size">16dp</dimen>
+</resources>

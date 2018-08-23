@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">WanAndroid</string>
+    <string name="label_home">首页</string>
+    <string name="label_todo">ToDo</string>
+    <string name="label_system">体系</string>
+    <string name="label_setting">设置</string>
+</resources>
