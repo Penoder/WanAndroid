@@ -2,10 +2,10 @@ package com.penoder.wanandroid.ui.viewModel
 
 import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
+import android.widget.ImageView
 import com.penoder.mylibrary.okhttp.BaseEntity
 import com.penoder.mylibrary.okhttp.OkCallBack
 import com.penoder.mylibrary.okhttp.OkHttpManager
-import com.penoder.mylibrary.utils.LogUtil
 import com.penoder.mylibrary.utils.ToastUtil
 import com.penoder.wanandroid.adapter.HomeAdapter
 import com.penoder.wanandroid.databinding.FragmentHomeBinding
@@ -14,6 +14,8 @@ import com.penoder.wanandroid.beans.ArticleListBean
 import com.penoder.wanandroid.constants.WanApi
 import com.penoder.wanandroid.ui.base.IViewModel
 import com.google.gson.reflect.TypeToken;
+import com.penoder.mylibrary.utils.ImgLoadUtil
+import com.penoder.wanandroid.beans.BannerBean
 
 /**
  * @author Penoder
@@ -36,17 +38,28 @@ class HomeViewModel(context: Context?, binding: FragmentHomeBinding?) : IViewMod
             }
         }
         binding?.recyclerHome?.adapter = homeAdapter
+
+
+        binding?.bannerHome?.setAdapter { banner, itemView, model, position ->
+            if (model != null) {
+                ImgLoadUtil.loadImg((model as BannerBean).imagePath, itemView as ImageView?)
+            }
+        }
     }
 
     fun getBannerInfo() {
-        val type = object : TypeToken<List<BaseEntity>>() {}.getType()
+        val type = object : TypeToken<List<BannerBean>>() {}.getType()
         OkHttpManager.build(mContext)
                 .addUrl(WanApi.HOME_BANNER)
-                .execute(OkCallBack<List<BaseEntity>> { isSuccess, data ->
+                .execute(OkCallBack<List<BannerBean>> { isSuccess, data ->
                     if (isSuccess) {
-                        LogUtil.i("banner: -- $data")
+                        val titleList = ArrayList<String>()
+                        for (item in data) {
+                            titleList.add(item.title)
+                        }
+                        mBinding?.bannerHome?.setData(data, titleList)
                     } else {
-                        LogUtil.i("69666666666666666")
+                        ToastUtil.showShortToast(mContext, "233333333333333")
                     }
                 }, type)
     }

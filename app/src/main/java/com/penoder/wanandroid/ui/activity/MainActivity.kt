@@ -1,6 +1,7 @@
 package com.penoder.wanandroid.ui.activity
 
 import android.support.v4.app.Fragment
+import android.support.v4.view.ViewPager
 import com.penoder.mylibrary.adapter.CommonFragmentAdapter
 import com.penoder.wanandroid.R
 import com.penoder.wanandroid.databinding.ActivityMainBinding
