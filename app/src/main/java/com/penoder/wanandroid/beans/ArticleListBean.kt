@@ -1,5 +1,7 @@
 package com.penoder.wanandroid.beans
 
+import com.penoder.mylibrary.okhttp.BaseEntity
+
 /**
  * 首页文章列表实体类
  *

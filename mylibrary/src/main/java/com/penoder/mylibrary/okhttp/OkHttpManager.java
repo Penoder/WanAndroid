@@ -6,14 +6,10 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
+
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
-import okhttp3.*;
-import org.json.JSONArray;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,6 +17,13 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Type;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * 实现 OkHttp 网络请求的简单封装
@@ -31,11 +34,6 @@ import java.util.List;
 public class OkHttpManager {
 
     private static WeakReference<Context> mWeakReference;
-
-    /**
-     * 定义该类的实例，方便其他方法的链式调用
-     */
-    private static OkHttpManager mInstance;
 
     /**
      * OkHttp 实例
@@ -62,14 +60,7 @@ public class OkHttpManager {
 
     public static OkHttpManager build(Context mContext) {
         mWeakReference = new WeakReference<>(mContext);
-        if (mInstance == null) {
-            synchronized (OkHttpManager.class) {
-                if (mInstance == null) {
-                    mInstance = new OkHttpManager();
-                }
-            }
-        }
-        return mInstance;
+        return  new OkHttpManager();
     }
 
     /**
@@ -216,7 +207,7 @@ public class OkHttpManager {
     /**
      * 表示开始执行网络请求
      */
-    public void execute(OkCallBack okCallBack, Class<Object> clz) {
+    public void execute(OkCallBack okCallBack, Object parseObj) {
         Request request;
         if (requestBuilder == null) {
             return;
@@ -235,7 +226,7 @@ public class OkHttpManager {
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                sendResponse(okCallBack, false, e.getMessage());
+                sendResponse(okCallBack, false, null);
             }
 
             @Override
@@ -251,30 +242,21 @@ public class OkHttpManager {
                             if (jsonObject.optInt("errorCode", -1) == 0) {
                                 Object object = jsonObject.get("data");
                                 Gson gson = new Gson();
-                                if (object instanceof JSONObject) {
-                                    Log.i("Penoder", "onResponse:111111111 " + object.toString());
-                                    Object obj = gson.fromJson(object.toString(), clz);
-                                    sendResponse(okCallBack, true, obj);
-                                } else if (object instanceof JSONArray) {
-                                    Log.i("Penoder", "onResponse:222222222 " + object.toString());
-                                    Type type = new TypeToken<List>() {
-                                    }.getType();
-                                    Object obj = gson.fromJson(object.toString(), type);
-                                    sendResponse(okCallBack, true, obj);
+                                if (parseObj instanceof Type) {
+                                    sendResponse(okCallBack, gson.fromJson(object.toString(), ((Type) parseObj)));
                                 } else {
-                                    Log.i("Penoder", "onResponse:3333333333 " + object.toString());
-                                    Object obj = gson.fromJson(object.toString(), clz);
-                                    sendResponse(okCallBack, true, obj);
+                                    Class<?> cls = parseObj.getClass();
+                                    sendResponse(okCallBack, true, gson.fromJson(object.toString(), cls));
                                 }
                             } else {
-                                sendResponse(okCallBack, false, jsonObject.get("errorMsg"));
+                                sendResponse(okCallBack, false, null);
                             }
                         }
                     } else {
                         sendResponse(okCallBack, false, null);
                     }
                 } catch (IOException | com.google.gson.JsonParseException e) {
-                    sendResponse(okCallBack, false, e.getMessage());
+                    sendResponse(okCallBack, false, null);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -286,6 +268,13 @@ public class OkHttpManager {
         mHandler.post(() -> {
             destroyDialog();
             okCallBack.onResponse(isSuccess, obj);
+        });
+    }
+
+    private void sendResponse(OkCallBack okCallBack, List<Object> list) {
+        mHandler.post(() -> {
+            destroyDialog();
+            okCallBack.onResponse(true, list);
         });
     }
 

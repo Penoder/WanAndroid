@@ -2,17 +2,18 @@ package com.penoder.wanandroid.ui.viewModel
 
 import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
+import com.penoder.mylibrary.okhttp.BaseEntity
 import com.penoder.mylibrary.okhttp.OkCallBack
 import com.penoder.mylibrary.okhttp.OkHttpManager
 import com.penoder.mylibrary.utils.LogUtil
 import com.penoder.mylibrary.utils.ToastUtil
 import com.penoder.wanandroid.adapter.HomeAdapter
+import com.penoder.wanandroid.databinding.FragmentHomeBinding
 import com.penoder.wanandroid.beans.ArticleBean
 import com.penoder.wanandroid.beans.ArticleListBean
-import com.penoder.wanandroid.beans.BaseEntity
 import com.penoder.wanandroid.constants.WanApi
-import com.penoder.wanandroid.databinding.FragmentHomeBinding
 import com.penoder.wanandroid.ui.base.IViewModel
+import com.google.gson.reflect.TypeToken;
 
 /**
  * @author Penoder
@@ -38,15 +39,16 @@ class HomeViewModel(context: Context?, binding: FragmentHomeBinding?) : IViewMod
     }
 
     fun getBannerInfo() {
+        val type = object : TypeToken<List<BaseEntity>>() {}.getType()
         OkHttpManager.build(mContext)
                 .addUrl(WanApi.HOME_BANNER)
-                .execute(OkCallBack<BaseEntity> { isSuccess, data ->
+                .execute(OkCallBack<List<BaseEntity>> { isSuccess, data ->
                     if (isSuccess) {
                         LogUtil.i("banner: -- $data")
-                    } else{
+                    } else {
                         LogUtil.i("69666666666666666")
                     }
-                }, )
+                }, type)
     }
 
     fun getArticleList() {
@@ -69,7 +71,7 @@ class HomeViewModel(context: Context?, binding: FragmentHomeBinding?) : IViewMod
                         mBinding?.refreshHome?.finishRefresh(isSuccess)
                     if (mBinding?.refreshHome?.isLoading!!)
                         mBinding?.refreshHome?.finishLoadmore(isSuccess)
-                }, ArticleListBean().javaClass)
+                }, ArticleListBean())
     }
 
 }
