@@ -4,4 +4,6 @@
     <string name="label_todo">ToDo</string>
     <string name="label_system">体系</string>
     <string name="label_setting">设置</string>
+    <string name="search">搜索</string>
+    <string name="label_person_center">个人中心</string>
 </resources>

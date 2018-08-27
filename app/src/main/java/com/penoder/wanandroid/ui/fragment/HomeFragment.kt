@@ -1,6 +1,5 @@
 package com.penoder.wanandroid.ui.fragment
 
-import android.os.Handler
 import com.penoder.mylibrary.refresh.api.RefreshLayout
 import com.penoder.mylibrary.refresh.listener.OnRefreshLoadmoreListener
 import com.penoder.wanandroid.R
@@ -8,7 +7,6 @@ import com.penoder.wanandroid.databinding.FragmentHomeBinding
 import com.penoder.wanandroid.ui.base.BaseFragment
 import com.penoder.wanandroid.ui.base.IViewModel
 import com.penoder.wanandroid.ui.viewModel.HomeViewModel
-
 
 /**
  * @author Penoder
@@ -33,15 +31,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         getBinding()?.refreshHome?.setOnRefreshLoadmoreListener(object : OnRefreshLoadmoreListener {
             override fun onRefresh(refreshlayout: RefreshLayout?) {
                 getBinding()?.viewModel?.pageNum = 0
-                Handler().postDelayed({
-                    getBinding()?.viewModel?.getArticleList()
-                }, 1000)
+                getBinding()?.viewModel?.getBannerInfo()
+                getBinding()?.viewModel?.getArticleList()
             }
 
             override fun onLoadmore(refreshlayout: RefreshLayout?) {
-                Handler().postDelayed({
-                    getBinding()?.viewModel?.getArticleList()
-                }, 1000)
+                getBinding()?.viewModel?.getArticleList()
             }
         })
     }

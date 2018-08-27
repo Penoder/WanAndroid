@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="viewModel" type="com.penoder.wanandroid.ui.activity.WebActivity"/>
+    </data>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <com.penoder.mylibrary.view.CustomTitle
+                android:id="@+id/titleBar_web"
+                app:leftIcon="@drawable/icon_back_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <ProgressBar
+                android:id="@+id/progress_webView"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:max="100"
+                tools:progress="30"
+                android:progressDrawable="@drawable/progress_background_normal"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"/>
+
+        <WebView
+                android:id="@+id/webView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+</layout>

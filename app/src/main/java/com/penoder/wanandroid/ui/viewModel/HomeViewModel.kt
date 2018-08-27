@@ -3,7 +3,6 @@ package com.penoder.wanandroid.ui.viewModel
 import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.ImageView
-import com.penoder.mylibrary.okhttp.BaseEntity
 import com.penoder.mylibrary.okhttp.OkCallBack
 import com.penoder.mylibrary.okhttp.OkHttpManager
 import com.penoder.mylibrary.utils.ToastUtil

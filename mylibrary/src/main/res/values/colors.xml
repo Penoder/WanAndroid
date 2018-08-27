@@ -18,6 +18,10 @@
 
     <color name="backgroundColor">#FFFFFFFF</color>
 
+    <color name="black3">#333333</color>
+    <color name="black6">#666666</color>
+    <color name="black9">#999999</color>
+
     <!-- 颜色库. -->
     <color name="transparent">#00000000</color>
     <color name="black">#000000</color>

@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity
 import com.penoder.wanandroid.BR
 
 /**
+ * 所有类默认是 final 修饰，不允许集成，可以使用 open 修饰
+ *
  * @author Penoder
  * @date 2018/8/19
  */
