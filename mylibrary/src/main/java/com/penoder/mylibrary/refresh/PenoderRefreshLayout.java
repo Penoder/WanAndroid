@@ -110,7 +110,7 @@ public class PenoderRefreshLayout extends ViewGroup implements RefreshLayout, Ne
     protected boolean mEnableHeaderTranslationContent = true;   //是否启用内容视图拖动效果
     protected boolean mEnableFooterTranslationContent = true;   //是否启用内容视图拖动效果
     protected boolean mEnablePreviewInEditMode = true;  //是否在编辑模式下开启预览功能
-    protected boolean mEnableOverScrollBounce = true;   //是否启用越界回弹
+    protected boolean mEnableOverScrollBounce = false;   //是否启用越界回弹
     protected boolean mEnableAutoLoadmore = false;  //是否在列表滚动到底部时自动加载更多
     protected boolean mEnablePureScrollMode = false;    //是否开启纯滚动模式
     protected boolean mEnableScrollContentWhenLoaded = true;    //是否在加载更多完成之后滚动内容显示新数据

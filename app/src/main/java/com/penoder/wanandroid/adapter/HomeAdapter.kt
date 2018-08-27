@@ -24,6 +24,8 @@ class HomeAdapter(datas: List<ArticleBean>) : CommonRecycleAdapter<ArticleBean>(
         val txtViewChapterTitle: TextView? = holder?.getView(R.id.txtView_chapterTitle)
         val txtViewChapterDesc: TextView? = holder?.getView(R.id.txtView_chapterDesc)
         val txtViewChapterTag: TextView? = holder?.getView(R.id.txtView_chapterTag)
+        val viewHomeDivider: View? = holder?.getView(R.id.view_homeDivider)
+        viewHomeDivider?.visibility = if (itemCount < position + 2) View.GONE else View.VISIBLE
 
         txtViewChapterAuthor?.text = articleBean?.author
         txtViewChapterTime?.text = articleBean?.niceDate

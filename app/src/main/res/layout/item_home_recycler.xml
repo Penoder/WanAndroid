@@ -95,6 +95,7 @@
     </RelativeLayout>
 
     <View
+            android:id="@+id/view_homeDivider"
             android:layout_width="match_parent"
             android:background="@color/dividerBlack"
             android:layout_height="10dp"/>
