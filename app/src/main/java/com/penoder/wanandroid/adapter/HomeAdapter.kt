@@ -37,6 +37,19 @@ class HomeAdapter(datas: List<ArticleBean>) : CommonRecycleAdapter<ArticleBean>(
             imgViewChapterPic?.visibility = View.VISIBLE
             ImgLoadUtil.loadImg(articleBean?.envelopePic, imgViewChapterPic)
         }
+
+        holder?.itemView?.setOnClickListener {
+            onItemClickListener?.onItemClick(articleBean)
+        }
     }
 
+    private var onItemClickListener: OnItemClickListener? = null
+
+    fun setOnItemClickListener(onItemClickListener: OnItemClickListener?) {
+        this.onItemClickListener = onItemClickListener
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(articleBean: ArticleBean?)
+    }
 }

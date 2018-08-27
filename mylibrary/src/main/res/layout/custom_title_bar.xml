@@ -70,10 +70,4 @@
         android:textColor="@color/commonTextWhite"
         android:textSize="16sp" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_gravity="bottom"
-        android:background="@color/dividerBlack" />
-
 </FrameLayout>

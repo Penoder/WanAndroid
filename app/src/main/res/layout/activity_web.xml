@@ -24,7 +24,7 @@
                 tools:progress="30"
                 android:progressDrawable="@drawable/progress_background_normal"
                 android:layout_width="match_parent"
-                android:layout_height="4dp"/>
+                android:layout_height="2dp"/>
 
         <WebView
                 android:id="@+id/webView"

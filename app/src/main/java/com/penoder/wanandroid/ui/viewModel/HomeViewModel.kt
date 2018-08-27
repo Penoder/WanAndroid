@@ -12,9 +12,10 @@ import com.penoder.wanandroid.beans.ArticleBean
 import com.penoder.wanandroid.beans.ArticleListBean
 import com.penoder.wanandroid.constants.WanApi
 import com.penoder.wanandroid.ui.base.IViewModel
-import com.google.gson.reflect.TypeToken;
+import com.google.gson.reflect.TypeToken
 import com.penoder.mylibrary.utils.ImgLoadUtil
 import com.penoder.wanandroid.beans.BannerBean
+import com.penoder.wanandroid.ui.activity.WebActivity
 
 /**
  * @author Penoder
@@ -30,6 +31,11 @@ class HomeViewModel(context: Context?, binding: FragmentHomeBinding?) : IViewMod
 
     init {
         homeAdapter = HomeAdapter(articleList)
+        homeAdapter?.setOnItemClickListener(object : HomeAdapter.OnItemClickListener {
+            override fun onItemClick(articleBean: ArticleBean?) {
+                WebActivity.startSelf(mContext, articleBean?.link)
+            }
+        })
         binding?.recyclerHome?.isFocusable = false
         binding?.recyclerHome?.layoutManager = object : LinearLayoutManager(mContext) {
             override fun canScrollVertically(): Boolean {
@@ -37,11 +43,13 @@ class HomeViewModel(context: Context?, binding: FragmentHomeBinding?) : IViewMod
             }
         }
         binding?.recyclerHome?.adapter = homeAdapter
-
-
-        binding?.bannerHome?.setAdapter { banner, itemView, model, position ->
+        binding?.bannerHome?.setAdapter { _, itemView, model, _ ->
             if (model != null) {
-                ImgLoadUtil.loadImg((model as BannerBean).imagePath, itemView as ImageView?)
+                val bannerBean: BannerBean = model as BannerBean
+                ImgLoadUtil.loadImg(bannerBean.imagePath, itemView as ImageView?)
+                itemView.setOnClickListener {
+                    WebActivity.startSelf(mContext, bannerBean.url)
+                }
             }
         }
     }
@@ -50,7 +58,7 @@ class HomeViewModel(context: Context?, binding: FragmentHomeBinding?) : IViewMod
         val type = object : TypeToken<List<BannerBean>>() {}.getType()
         OkHttpManager.build(mContext)
                 .addUrl(WanApi.HOME_BANNER)
-                .execute(OkCallBack<List<BannerBean>> { isSuccess, data ->
+                .execute(OkCallBack<List<BannerBean>> { isSuccess, data: List<BannerBean> ->
                     if (isSuccess) {
                         val titleList = ArrayList<String>()
                         for (item in data) {
@@ -66,12 +74,12 @@ class HomeViewModel(context: Context?, binding: FragmentHomeBinding?) : IViewMod
     fun getArticleList() {
         OkHttpManager.build(mContext)
                 .addUrl(WanApi.ARTICLE_LIST + pageNum + WanApi.RESPONSE_FORMAT)
-                .execute(OkCallBack<ArticleListBean> { isSuccess, articleListBean ->
+                .execute(OkCallBack<ArticleListBean> { isSuccess, articleListBean: ArticleListBean ->
                     if (isSuccess) {
                         if (pageNum == 0) {
                             articleList.clear()
                         }
-                        if (articleListBean?.datas != null && !articleListBean.datas.isEmpty()) {
+                        if (!articleListBean.datas.isEmpty()) {
                             articleList.addAll(articleListBean.datas)
                             homeAdapter?.notifyDataSetChanged()
                         }

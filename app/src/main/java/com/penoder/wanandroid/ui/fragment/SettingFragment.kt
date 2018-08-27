@@ -2,11 +2,9 @@ package com.penoder.wanandroid.ui.fragment
 
 import com.penoder.wanandroid.R
 import com.penoder.wanandroid.databinding.FragmentTodoBinding
-import com.penoder.wanandroid.ui.activity.WebActivity
 import com.penoder.wanandroid.ui.base.BaseFragment
 import com.penoder.wanandroid.ui.base.IViewModel
 import com.penoder.wanandroid.ui.viewModel.SettingViewModel
-import com.penoder.wanandroid.ui.viewModel.TodoViewModel
 
 
 /**
@@ -20,7 +18,6 @@ class SettingFragment : BaseFragment<FragmentTodoBinding>() {
     }
 
     override fun createViewModel(): IViewModel? {
-        WebActivity.startSelf(activity)
         return SettingViewModel()
     }
 
