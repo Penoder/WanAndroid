@@ -16,7 +16,7 @@ import com.penoder.wanandroid.BR
 abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity() {
 
     private var binding: V? = null
-    protected var mContext: Context? = null
+    var mContext: Context? = null
     private var lastClickTime: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,7 +55,7 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity() {
     /**
      * 检测是否快速点击
      */
-    protected fun isFastClick(millSec: Int): Boolean {
+    fun isFastClick(millSec: Int): Boolean {
         if (System.currentTimeMillis() - lastClickTime < millSec) {
             return true
         }

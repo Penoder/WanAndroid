@@ -10,15 +10,28 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.MainActivity"
-                  android:screenOrientation="portrait">
+        <activity
+                android:name=".ui.activity.MainActivity"
+                android:screenOrientation="portrait">
+        </activity>
+        <activity
+                android:name=".ui.activity.WebActivity"
+                android:screenOrientation="portrait"/>
+
+
+        <!-- Jetpack 相关的页面. -->
+        <activity
+                android:name="org.ronald.learn.jetpack.MainTabActivity"
+                android:screenOrientation="portrait"/>
+
+        <activity
+                android:name="org.ronald.learn.retrofit.MainRxActivity"
+                android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.WebActivity"
-                  android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

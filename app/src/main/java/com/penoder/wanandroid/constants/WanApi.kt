@@ -7,7 +7,7 @@ package com.penoder.wanandroid.constants
  */
 object WanApi {
 
-    private const val BASE_URL = "http://www.wanandroid.com/"
+    const val BASE_URL = "http://www.wanandroid.com/"
     const val RESPONSE_FORMAT = "/json"
 
     // 首页文章列表

@@ -9,4 +9,10 @@ import android.app.Application
  */
 class WanApplication : Application() {
 
+    companion object {
+        val mInstance by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
+            WanApplication()
+        }
+    }
+
 }
