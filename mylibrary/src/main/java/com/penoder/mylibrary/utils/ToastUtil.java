@@ -25,6 +25,7 @@ public class ToastUtil {
             mShortToast = new Toast(mContext);
             mShortToast.setDuration(Toast.LENGTH_SHORT);
         }
+        cancelToast();
         TextView txtView = (TextView) LayoutInflater.from(mContext).inflate(R.layout.view_text_toast, null);
         txtView.setText(msg);
         mShortToast.setView(txtView);
@@ -37,6 +38,7 @@ public class ToastUtil {
             mLongToast = new Toast(mContext);
             mLongToast.setDuration(Toast.LENGTH_LONG);
         }
+        cancelToast();
         TextView txtView = (TextView) LayoutInflater.from(mContext).inflate(R.layout.view_text_toast, null);
         txtView.setText(msg);
         mLongToast.setView(txtView);

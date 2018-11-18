@@ -1,8 +1,8 @@
 package com.penoder.wanandroid.ui.activity
 
 import android.support.v4.app.Fragment
-import android.support.v4.view.ViewPager
 import com.penoder.mylibrary.adapter.CommonFragmentAdapter
+import com.penoder.mylibrary.utils.ToastUtil
 import com.penoder.wanandroid.R
 import com.penoder.wanandroid.databinding.ActivityMainBinding
 import com.penoder.wanandroid.ui.base.BaseActivity
@@ -25,6 +25,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private var fragments = ArrayList<Fragment>()
 
+    private var lastClickTime: Long = 0L
+
     override fun getLayoutID(): Int {
         return R.layout.activity_main
     }
@@ -44,5 +46,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         getBinding()?.viewPagerMain?.offscreenPageLimit = 4
         // 默认第一个选中
         getBinding()?.viewModel?.setSelectTab(0)
+    }
+
+    override fun onBackPressed() {
+        if (System.currentTimeMillis() - lastClickTime > 1500) {
+            ToastUtil.showShortToast(this, "再按一次退出程序")
+            lastClickTime = System.currentTimeMillis()
+            return
+        }
+        System.gc()
+        System.exit(0)
     }
 }

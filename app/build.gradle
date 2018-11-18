@@ -1,16 +1,17 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'realm-android'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "28.0.2"
+    compileSdkVersion compile_version
+    buildToolsVersion build_version
     defaultConfig {
         applicationId "com.penoder.wanandroid"
-        minSdkVersion 19
-        targetSdkVersion 26
+        minSdkVersion min_version
+        targetSdkVersion target_version
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -18,15 +19,18 @@ android {
     buildTypes {
         debug {
             minifyEnabled false
+            applicationIdSuffix '.debug'
+            buildConfigField("int", "ENV_TYPE", "1")
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
             minifyEnabled false
+            buildConfigField("int", "ENV_TYPE", "2")
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     dataBinding {
-        enabled = true
+        enabled true
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -35,27 +39,23 @@ android {
     packagingOptions {
         exclude 'META-INF/rxjava.properties'
     }
-    productFlavors {
-    }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support.constraint:constraint-layout:1.1.2'
-    compile 'junit:junit:4.12'
-    androidTestCompile('com.android.support.test.espresso:espresso-core:3.0.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    kapt 'com.android.databinding:compiler:2.3.2'
-
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
-    compile 'io.reactivex.rxjava2:rxjava:2.0.7'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    testCompile 'junit:junit:4.12'
     compile project(':mylibrary')
-}
-repositories {
-    mavenCentral()
+    // EventBus 依赖
+    // compile 'org.greenrobot:eventbus:3.0.0'
+
+
+    // --------------- 尝试 Jetpack 组件 ----------------
+    // Room components
+    implementation "android.arch.persistence.room:runtime:$roomVersion"
+    annotationProcessor "android.arch.persistence.room:compiler:$roomVersion"
+    androidTestImplementation "android.arch.persistence.room:testing:$roomVersion"
+
+    // Lifecycle components
+    implementation "android.arch.lifecycle:extensions:$archLifecycleVersion"
+    annotationProcessor "android.arch.lifecycle:compiler:$archLifecycleVersion"
 }

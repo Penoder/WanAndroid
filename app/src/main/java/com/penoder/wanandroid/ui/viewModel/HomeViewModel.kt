@@ -3,19 +3,19 @@ package com.penoder.wanandroid.ui.viewModel
 import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.ImageView
+import com.google.gson.reflect.TypeToken
+import com.penoder.mylibrary.okhttp.HttpClient
 import com.penoder.mylibrary.okhttp.OkCallBack
-import com.penoder.mylibrary.okhttp.OkHttpManager
+import com.penoder.mylibrary.utils.ImgLoadUtil
 import com.penoder.mylibrary.utils.ToastUtil
 import com.penoder.wanandroid.adapter.HomeAdapter
-import com.penoder.wanandroid.databinding.FragmentHomeBinding
 import com.penoder.wanandroid.beans.ArticleBean
 import com.penoder.wanandroid.beans.ArticleListBean
-import com.penoder.wanandroid.constants.WanApi
-import com.penoder.wanandroid.ui.base.IViewModel
-import com.google.gson.reflect.TypeToken
-import com.penoder.mylibrary.utils.ImgLoadUtil
 import com.penoder.wanandroid.beans.BannerBean
+import com.penoder.wanandroid.constants.WanApi
+import com.penoder.wanandroid.databinding.FragmentHomeBinding
 import com.penoder.wanandroid.ui.activity.WebActivity
+import com.penoder.wanandroid.ui.base.IViewModel
 
 /**
  * @author Penoder
@@ -55,8 +55,8 @@ class HomeViewModel(context: Context?, binding: FragmentHomeBinding?) : IViewMod
     }
 
     fun getBannerInfo() {
-        val type = object : TypeToken<List<BannerBean>>() {}.getType()
-        OkHttpManager.build(mContext)
+        val type = object : TypeToken<List<BannerBean>>() {}.type
+        HttpClient.create(mContext)
                 .addUrl(WanApi.HOME_BANNER)
                 .execute(OkCallBack<List<BannerBean>> { isSuccess, data: List<BannerBean> ->
                     if (isSuccess) {
@@ -66,13 +66,13 @@ class HomeViewModel(context: Context?, binding: FragmentHomeBinding?) : IViewMod
                         }
                         mBinding?.bannerHome?.setData(data, titleList)
                     } else {
-                        ToastUtil.showShortToast(mContext, "233333333333333")
+                        ToastUtil.showShortToast(mContext, "加载数据失败")
                     }
                 }, type)
     }
 
     fun getArticleList() {
-        OkHttpManager.build(mContext)
+        HttpClient.create(mContext)
                 .addUrl(WanApi.ARTICLE_LIST + pageNum + WanApi.RESPONSE_FORMAT)
                 .execute(OkCallBack<ArticleListBean> { isSuccess, articleListBean: ArticleListBean ->
                     if (isSuccess) {
@@ -85,13 +85,13 @@ class HomeViewModel(context: Context?, binding: FragmentHomeBinding?) : IViewMod
                         }
                         pageNum++
                     } else {
-                        ToastUtil.showShortToast(mContext, "66666")
+                        ToastUtil.showShortToast(mContext, "加载数据失败")
                     }
                     if (mBinding?.refreshHome?.isRefreshing!!)
                         mBinding?.refreshHome?.finishRefresh(isSuccess)
                     if (mBinding?.refreshHome?.isLoading!!)
                         mBinding?.refreshHome?.finishLoadmore(isSuccess)
-                }, ArticleListBean())
+                }, ArticleListBean::class.java)
     }
 
 }

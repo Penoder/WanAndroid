@@ -26,7 +26,7 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
         mContext = activity
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, getLayoutID(), container, false)
         binding?.executePendingBindings()
         val viewModel = createViewModel()
